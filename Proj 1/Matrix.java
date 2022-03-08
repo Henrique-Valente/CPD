@@ -28,6 +28,7 @@ public class Matrix {
     }
 
     static void onMult(){
+
         double[][] pha = new double[line][column]; 
         double[][] phb = new double[line][column]; 
         double[][] phc = new double[line][column]; 
@@ -40,12 +41,20 @@ public class Matrix {
 		    for(int j=0; j<column; j++)
 			    phb[i][j] = (double)(i+1);
 
+        long startTime = System.nanoTime(); //Onde começa a contar o tempo
+
         for(int i=0; i<line; i++)
             for(int j=0; j<column; j++)
                 for(int k=0; k<line; k++)
                     phc[i][j] += pha[i][k] * phb[k][j];
 
+        long stopTime = System.nanoTime(); //Onde acaba de contar
+        long elapsedTime = stopTime - startTime; //Cálculo do tempo que passou
+        double elapsedTimeInSecond = (double) elapsedTime / 1_000_000_000;//Converter em segundos
+
+
         printFirstLine(phc, column); //Imprime 10 elementos da matriz
+        System.out.println("Time: " + elapsedTimeInSecond + " seconds");
     }
 
     public static void main(String[] args) {
